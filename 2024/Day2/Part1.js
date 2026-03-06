@@ -4,18 +4,18 @@ function reactorSafe(input) {
   let saveCount = 0;
 
   input.forEach((line) => {
-    const lineArray = line.split(" ").map(Number);
+    const levels = line.split(" ").map(Number);
     let differ = null;
 
-    for (let i = 0; i < lineArray.length - 1; i++) {
-      const diff = lineArray[i] - lineArray[i + 1];
+    for (let i = 0; i < levels.length - 1; i++) {
+      const diff = levels[i] - levels[i + 1];
       const sign = Math.sign(diff);
 
       if (!differ) differ = sign;
-      else if (!sign) return;
       else if (differ !== sign) return;
 
-      if ((diff > 3) | (diff === 0) | (diff < -3)) return;
+      const absDiff = Math.abs(diff);
+      if (absDiff > 3 || absDiff < 1) return;
     }
 
     saveCount++;
